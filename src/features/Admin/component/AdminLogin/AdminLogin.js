@@ -1,8 +1,8 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
-import "./admin_login.css";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { login } from "../../../../store/auth";
+import "./admin_login.css";
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,11 @@ const AdminLogin = () => {
       >
         <Form className="box">
           <div className="input-box">
-            <Field type="text" name="username" />
+            <Field type="text" name="username" required />
             <label>Username</label>
           </div>
           <div className="input-box">
-            <Field type="password" name="password" required="" />
+            <Field type="password" name="password" required />
             <label>Password</label>
           </div>
           <Field type="submit" value="Submit" />

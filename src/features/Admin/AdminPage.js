@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import AdminHeader from "./component/AdminHeader/AdminHeader";
 import AdminLogin from "./component/AdminLogin/AdminLogin";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/auth";
 
 const AdminPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.auth);
   // console.log({ auth });
   if (!auth) {
@@ -12,10 +12,13 @@ const AdminPage = () => {
   }
 
   return (
-    <div>
-      Hi, {auth.username}!
-      <button onClick={() => dispatch(logout())}>Logout</button>
-    </div>
+    // <div>
+    //   Hi, {auth.username}!
+    //   <button onClick={() => dispatch(logout())}>Logout</button>
+    // </div>
+    <section className="admin">
+      <AdminHeader />
+    </section>
   );
 };
 
