@@ -1,8 +1,9 @@
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import AdminPage from "./features/Admin/AdminPage";
-import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (
