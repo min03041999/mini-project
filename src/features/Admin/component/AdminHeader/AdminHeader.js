@@ -1,23 +1,3 @@
-// import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { logout } from "../../../../store/auth";
-
-// const AdminHeader = () => {
-//   const dispatch = useDispatch();
-//   const { auth } = useSelector((state) => state.auth);
-//   return (
-//     <div>
-//       <div className="admin-header">
-//         <h2>Dashboard</h2>
-//         Hi, {auth.username}!
-//         <button onClick={() => dispatch(logout())}>Logout</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AdminHeader;
-
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -27,12 +7,38 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Dropdown } from "antd";
+// import MenuItem from "antd/lib/menu/MenuItem";
+// import SubMenu from "antd/lib/menu/SubMenu";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../store/auth";
 import "./admin-header.css";
 
 const { Header, Sider, Content } = Layout;
+
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
+
+const items = [
+  getItem("User", "1", <UserOutlined />),
+  getItem("Category", "sub1", <UploadOutlined />, [
+    getItem("Option 1", "2"),
+    getItem("Option 2", "3"),
+    getItem("Option 3", "4"),
+  ]),
+  getItem("Product", "sub2", <VideoCameraOutlined />, [
+    getItem("Option 1", "5"),
+    getItem("Option 2", "6"),
+  ]),
+];
+
+// function getItemInfo(label, key)
 
 const AdminHeader = () => {
   const [state, setState] = useState(false);
@@ -52,24 +58,11 @@ const AdminHeader = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "User",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "Category",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "Product",
-            },
-          ]}
+          defaultOpenKeys={["1"]}
+          items={items}
+          onSelect={(e) => {
+            console.log(e);
+          }}
         />
       </Sider>
       <Layout className="site-layout">
@@ -84,19 +77,18 @@ const AdminHeader = () => {
           <Dropdown
             overlay={
               <Menu>
-                <Menu.Item key="0">Info Account</Menu.Item>
+                {/* <Menu.Item key="0">Info Account</Menu.Item>
                 <Menu.Item key="1">
                   <div className="" onClick={() => dispatch(logout())}>
                     Logout
                   </div>
-                </Menu.Item>
+                </Menu.Item> */}
               </Menu>
             }
             trigger={["click"]}
           >
-            <a
+            <div
               className="ant-dropdown-link"
-              href={() => false}
               style={{ display: "flex" }}
               onClick={(e) => e.preventDefault()}
             >
@@ -110,7 +102,7 @@ const AdminHeader = () => {
               >
                 <DownOutlined />
               </div>
-            </a>
+            </div>
           </Dropdown>
         </Header>
         <Content
