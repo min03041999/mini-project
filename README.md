@@ -5,3 +5,7 @@ Setup
 ### `npm i axios`
 
 ### `npm install --save react-redux @reduxjs/toolkit`
+
+### `npm i yup`
+
+### `npm i react-bootstrap@next bootstrap@5.1.0`

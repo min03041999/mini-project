@@ -107,3 +107,8 @@
 .login-true {
   opacity: 0;
 }
+
+.invalid-feedback {
+  position: absolute;
+  top: 65%;
+}
