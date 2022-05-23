@@ -11,7 +11,6 @@ const AdminCategory = () => {
     const Category = async () => {
       try {
         const response = await categoryApi.getCategoryList();
-        // console.log(response.data);
         setItems(response.data);
       } catch (err) {
         console.error(err);
