@@ -7,11 +7,11 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Dropdown } from "antd";
-// import MenuItem from "antd/lib/menu/MenuItem";
-// import SubMenu from "antd/lib/menu/SubMenu";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { logout } from "../../../../store/auth";
+import Routes from "../../Config/Routes";
 import "./admin-header.css";
 
 const { Header, Sider, Content } = Layout;
@@ -26,19 +26,16 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("User", "1", <UserOutlined />),
+  getItem(<Link to="/admin/user">User</Link>, "0", <UserOutlined />),
   getItem("Category", "sub1", <UploadOutlined />, [
-    getItem("Option 1", "2"),
-    getItem("Option 2", "3"),
-    getItem("Option 3", "4"),
+    getItem(<Link to="/admin/category">List Category</Link>, "2"),
+    getItem(<Link to="#">Specific Category</Link>, "3"),
   ]),
   getItem("Product", "sub2", <VideoCameraOutlined />, [
-    getItem("Option 1", "5"),
-    getItem("Option 2", "6"),
+    getItem("Option 1", "4"),
+    getItem("Option 2", "5"),
   ]),
 ];
-
-// function getItemInfo(label, key)
 
 const AdminHeader = () => {
   const [state, setState] = useState(false);
@@ -51,6 +48,22 @@ const AdminHeader = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.auth);
 
+  //Dropdown
+  const dropDown = (
+    <Menu
+      items={[
+        {
+          label: <div>Info Account</div>,
+          key: "0",
+        },
+        {
+          label: <div onClick={() => dispatch(logout())}>Logout</div>,
+          key: "1",
+        },
+      ]}
+    />
+  );
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={state}>
@@ -60,9 +73,6 @@ const AdminHeader = () => {
           mode="inline"
           defaultOpenKeys={["1"]}
           items={items}
-          onSelect={(e) => {
-            console.log(e);
-          }}
         />
       </Sider>
       <Layout className="site-layout">
@@ -74,19 +84,7 @@ const AdminHeader = () => {
             {state ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
           </div>
 
-          <Dropdown
-            overlay={
-              <Menu>
-                {/* <Menu.Item key="0">Info Account</Menu.Item>
-                <Menu.Item key="1">
-                  <div className="" onClick={() => dispatch(logout())}>
-                    Logout
-                  </div>
-                </Menu.Item> */}
-              </Menu>
-            }
-            trigger={["click"]}
-          >
+          <Dropdown overlay={dropDown} trigger={["click"]}>
             <div
               className="ant-dropdown-link"
               style={{ display: "flex" }}
@@ -113,7 +111,7 @@ const AdminHeader = () => {
             minHeight: 850,
           }}
         >
-          Content
+          <Routes />
         </Content>
       </Layout>
     </Layout>
