@@ -14,6 +14,10 @@ Setup
 
 ### `npm i react-toastify`
 
+Was Uninstall
+
+### `npm install eslint-plugin-react-hooks --save-dev`
+
 API
 
 ### `https://fakestoreapi.com/docs`
