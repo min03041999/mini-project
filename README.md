@@ -12,6 +12,8 @@ Setup
 
 ### `npm i antd`
 
+### `npm i react-toastify`
+
 API
 
 ### `https://fakestoreapi.com/docs`

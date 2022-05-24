@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../../store/auth";
 import Routes from "../../Config/Routes";
-import "./admin-header.css";
+import "./admin-dashboard.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -37,7 +37,7 @@ const items = [
   ]),
 ];
 
-const AdminHeader = () => {
+const AdminDashboard = () => {
   const [state, setState] = useState(false);
 
   const toggle = () => {
@@ -118,4 +118,4 @@ const AdminHeader = () => {
   );
 };
 
-export default AdminHeader;
+export default AdminDashboard;
