@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import userApi from "../../../../api/UserApi";
-import AdminTable from "../../common/AdminTable";
+import AdminTable from "../../common/AdminTable/AdminTable";
 
 const AdminUser = () => {
   const [items, setItems] = useState([]);

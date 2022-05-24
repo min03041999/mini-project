@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import categoryApi from "../../../../api/CategoryApi";
-import AdminTable from "../../common/AdminTable";
+import AdminTable from "../../common/AdminTable/AdminTable";
 import "./admin-category.css";
 
 const AdminCategory = () => {
