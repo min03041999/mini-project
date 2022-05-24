@@ -1,6 +1,7 @@
 import { Button, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
 import userApi from "../../../../api/UserApi";
 import AdminTable from "../../common/AdminTable";
 
@@ -64,6 +65,7 @@ const AdminUser = () => {
           <Button
             type="primary"
             style={{ backgroundColor: "#ff4d4f", borderColor: "#ff4d4f" }}
+            onClick={() => handleDeleteUser(i.key)}
           >
             Delete
           </Button>
@@ -71,25 +73,41 @@ const AdminUser = () => {
       ),
     },
   ];
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
 
-      try {
-        const res = await userApi.getUserList();
+  const fetchData = async () => {
+    setLoading(true);
 
-        if (res.status === 200) {
-          res.data && mapData(res.data);
-        }
-      } catch (error) {
-        console.error(error);
-        toast.error("Error");
-      } finally {
-        setLoading(false);
+    try {
+      const res = await userApi.getUserList();
+
+      if (res.status === 200) {
+        res.data && mapData(res.data);
       }
-    };
+    } catch (error) {
+      console.error(error);
+      toast.error("Error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //Delete
+  const handleDeleteUser = async (id) => {
+    try {
+      const res = await userApi.deleteUser(id);
+      if (res.status === 200 || res.status === 204) {
+        toast.success("Xóa thành công!");
+        fetchData();
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <h2>User List</h2>
