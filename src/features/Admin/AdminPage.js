@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AdminHeader from "./component/AdminHeader/AdminHeader";
+import AdminDashboard from "./component/AdminDashboard/AdminDashboard";
 import AdminLogin from "./component/AdminLogin/AdminLogin";
 
 const AdminPage = () => {
@@ -11,7 +11,7 @@ const AdminPage = () => {
 
   return (
     <section className="admin">
-      <AdminHeader />
+      <AdminDashboard />
     </section>
   );
 };

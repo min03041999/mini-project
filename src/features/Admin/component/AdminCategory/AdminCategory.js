@@ -1,39 +1,58 @@
-import { Table } from "antd";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import categoryApi from "../../../../api/CategoryApi";
+import AdminTable from "../../common/AdminTable";
 import "./admin-category.css";
 
 const AdminCategory = () => {
   const [items, setItems] = useState([]);
-  const { Column } = Table;
+  const [loading, setLoading] = useState();
+
+  const mapData = (data) => {
+    const newData = data.map((item, index) => ({
+      key: index + 1,
+      name: item,
+    }));
+    setItems(newData);
+  };
+
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "key",
+      key: "key",
+    },
+    {
+      title: "Category Name",
+      dataIndex: "name",
+      key: "name",
+    },
+  ];
 
   useEffect(() => {
-    const Category = async () => {
+    const fetchData = async () => {
+      setLoading(true);
+
       try {
-        const response = await categoryApi.getCategoryList();
-        setItems(response.data);
-      } catch (err) {
-        console.error(err);
+        const res = await categoryApi.getCategoryList();
+
+        if (res.status === 200) {
+          res.data && mapData(res.data);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error");
+      } finally {
+        setLoading(false);
       }
     };
-    Category();
+    fetchData();
   }, []);
-
-  const data = [];
-  for (let i = 1; i <= items.length; i++) {
-    data.push({
-      key: i,
-      name: `${items[i]}`,
-    });
-  }
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <h2>List Category</h2>
-      <Table dataSource={data}>
-        <Column title="ID" dataIndex="key" key="key" />
-        <Column title="Category Name" dataIndex="name" key="name" />
-      </Table>
+      <AdminTable limit={5} loading={loading} data={items} columns={columns} />
     </div>
   );
 };
