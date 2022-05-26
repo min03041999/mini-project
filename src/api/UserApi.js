@@ -5,6 +5,10 @@ const userApi = {
     const url = "/users";
     return api.get(url);
   },
+  getUser: (id) => {
+    const url = `/users/${id}`;
+    return api.get(url);
+  },
   deleteUser: (id) => {
     const url = `/users/${id}`;
     return api.delete(url);
