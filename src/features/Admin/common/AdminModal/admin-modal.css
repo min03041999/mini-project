@@ -35,6 +35,11 @@
     transform: translateY(0);
 }
 
+.modal-auth__header {
+    font-weight: 700;
+    font-size: 30px;
+}
+
 .modal-auth__header, .modal-auth__body, .modal-auth__footer {
     padding: 16px 20px;
 }

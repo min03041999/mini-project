@@ -114,7 +114,7 @@ const AdminUser = () => {
       if (res.status === 200) {
         setShowModal(true);
         setUser(res.data);
-        // console.log(res.data);
+        console.log(res.data);
       }
     } catch (error) {
       setShowModal(false);
