@@ -1,4 +1,4 @@
-.modal {
+.modal-auth {
     opacity: 0;
     visibility: hidden;
     position: fixed;
@@ -12,12 +12,12 @@
     transition: 0.3s ease-in-out;
 }
 
-.modal.active {
+.modal-auth.active {
     opacity: 1;
     visibility: visible;
 }
 
-.modal__content {
+.modal-auth__content {
     width: 500px;
     margin: 15% auto;
     background-color: #fff;
@@ -29,25 +29,25 @@
     transform: translateY(-100px);
 }
 
-.modal.active .modal__content {
+.modal-auth.active .modal-auth__content {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-.modal__header, .modal__body, .modal__footer {
+.modal-auth__header, .modal-auth__body, .modal-auth__footer {
     padding: 16px 20px;
 }
 
-.modal__close {
+.modal-auth__close {
     position: absolute;
-    top: 16px;
+    top: 5px;
     right: 20px;
     font-size: 1.5rem;
     cursor: pointer;
     color: #7f7f7f;
 }
 
-.modal__close:hover {
+.modal-auth__close:hover {
     color: #000;
 }

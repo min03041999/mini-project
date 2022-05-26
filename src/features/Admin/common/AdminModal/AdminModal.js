@@ -16,11 +16,14 @@ const AdminModal = (props) => {
     };
   }, [props]);
   return (
-    <div ref={modalRef} className={`modal ${props.show ? "active" : ""}`}>
-      <div className="modal_content">
+    <div ref={modalRef} className={`modal-auth ${props.show ? "active" : ""}`}>
+      <div className="modal-auth__content">
         {!props.hideCloseButton && (
-          <span onClick={() => props.setShow(false)} className="modal__close">
-            &time;
+          <span
+            onClick={() => props.setShow(false)}
+            className="modal-auth__close"
+          >
+            &times;
           </span>
         )}
         {props.children}
@@ -32,13 +35,13 @@ const AdminModal = (props) => {
 export default AdminModal;
 
 export const ModalHeader = (props) => {
-  return <div className="modal__header">{props.children}</div>;
+  return <div className="modal-auth__header">{props.children}</div>;
 };
 
 export const ModalBody = (props) => {
-  return <div className="modal__body">{props.children}</div>;
+  return <div className="modal-auth__body">{props.children}</div>;
 };
 
 export const ModalFooter = (props) => {
-  return <div className="modal__footer">{props.children}</div>;
+  return <div className="modal-auth__footer">{props.children}</div>;
 };

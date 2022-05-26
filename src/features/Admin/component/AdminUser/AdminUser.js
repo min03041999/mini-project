@@ -1,13 +1,15 @@
 import { Button, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
 import userApi from "../../../../api/UserApi";
 import AdminTable from "../../common/AdminTable/AdminTable";
+import AdminUserDetail from "./components/AdminUserDetail";
 
 const AdminUser = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState();
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
@@ -53,6 +55,7 @@ const AdminUser = () => {
           <Button
             type="primary"
             style={{ backgroundColor: "#40a9ff", borderColor: "#40a9ff" }}
+            onClick={() => handleDetailUser(i.key)}
           >
             Detail
           </Button>
@@ -104,6 +107,21 @@ const AdminUser = () => {
     }
   };
 
+  //Detail
+  const handleDetailUser = async (id) => {
+    try {
+      const res = await userApi.getUser(id);
+      if (res.status === 200) {
+        setShowModal(true);
+        setUser(res.data);
+        // console.log(res.data);
+      }
+    } catch (error) {
+      setShowModal(false);
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,6 +145,7 @@ const AdminUser = () => {
         data={items}
         columns={columns}
       ></AdminTable>
+      <AdminUserDetail show={showModal} setShow={setShowModal} user={user} />
     </div>
   );
 };
