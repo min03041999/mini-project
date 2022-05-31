@@ -18,6 +18,10 @@ Was Uninstall
 
 ### `npm install eslint-plugin-react-hooks --save-dev`
 
+Setup
+
+### `npm install react-formik-yup`
+
 API
 
 ### `https://fakestoreapi.com/docs`

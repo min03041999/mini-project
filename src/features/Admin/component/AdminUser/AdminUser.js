@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import userApi from "../../../../api/UserApi";
 import AdminTable from "../../common/AdminTable/AdminTable";
+import AdminUserAdd from "./components/AdminUserAdd";
 import AdminUserDetail from "./components/AdminUserDetail";
 
 const AdminUser = () => {
@@ -122,6 +123,12 @@ const AdminUser = () => {
     }
   };
 
+  //Add
+  const handleAddUser = () => {
+    setUser();
+    setShowModal(true);
+  };
+
   useEffect(() => {
     fetchData();
   }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,6 +143,7 @@ const AdminUser = () => {
           backgroundColor: "#73d13d",
           borderColor: "#73d13d",
         }}
+        onClick={() => handleAddUser()}
       >
         Add User
       </Button>
@@ -145,6 +153,7 @@ const AdminUser = () => {
         data={items}
         columns={columns}
       ></AdminTable>
+      <AdminUserAdd show={showModal} setShow={setShowModal} user={user} />
       <AdminUserDetail show={showModal} setShow={setShowModal} user={user} />
     </div>
   );
