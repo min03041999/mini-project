@@ -13,6 +13,10 @@ const userApi = {
     const url = `/users/${id}`;
     return api.delete(url);
   },
+  addUser: (data) => {
+    const url = "/users";
+    return api.post(url, data);
+  },
 };
 
 export default userApi;

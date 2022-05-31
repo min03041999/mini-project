@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../../../store/auth";
 import "./admin_login.css";
 import * as Yup from "yup";
+import { FormGroup } from "react-bootstrap";
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const AdminLogin = () => {
         }}
       >
         <Form className="box" autoComplete="off">
-          <div className="input-box">
+          <FormGroup className="input-box">
             <Field type="text" name="username" required />
             <label>Username</label>
             <ErrorMessage
@@ -33,8 +34,8 @@ const AdminLogin = () => {
               className="d-block invalid-feedback"
               component="span"
             />
-          </div>
-          <div className="input-box">
+          </FormGroup>
+          <FormGroup className="input-box">
             <Field type="password" name="password" required />
             <label>Password</label>
             <ErrorMessage
@@ -42,7 +43,7 @@ const AdminLogin = () => {
               className="d-block invalid-feedback"
               component="span"
             />
-          </div>
+          </FormGroup>
           <Field type="submit" value="Submit" />
         </Form>
       </Formik>

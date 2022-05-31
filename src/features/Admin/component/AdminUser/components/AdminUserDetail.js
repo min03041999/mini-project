@@ -11,7 +11,10 @@ const AdminUserDetail = (props) => {
   const user = props.user;
 
   return (
-    <AdminModal show={props.show} setShow={props.setShow}>
+    <AdminModal
+      show={user ? props.show : ""}
+      setShow={user ? props.setShow : ""}
+    >
       <ModalHeader>Detail User</ModalHeader>
       <ModalBody>
         <Row>

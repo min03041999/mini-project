@@ -17,7 +17,7 @@ const AdminModal = (props) => {
   }, [props]);
   return (
     <div ref={modalRef} className={`modal-auth ${props.show ? "active" : ""}`}>
-      <div className="modal-auth__content">
+      <div className="modal-auth__content" style={props.style}>
         {!props.hideCloseButton && (
           <span
             onClick={() => props.setShow(false)}
