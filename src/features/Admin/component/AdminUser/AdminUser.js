@@ -5,12 +5,14 @@ import userApi from "../../../../api/UserApi";
 import AdminTable from "../../common/AdminTable/AdminTable";
 import AdminUserAdd from "./components/AdminUserAdd";
 import AdminUserDetail from "./components/AdminUserDetail";
+import AdminUserEdit from "./components/AdminUserEdit";
 
 const AdminUser = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState();
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState();
+  const [check, setCheck] = useState();
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
@@ -63,6 +65,7 @@ const AdminUser = () => {
           <Button
             type="primary"
             style={{ backgroundColor: "#fadb14", borderColor: "#fadb14" }}
+            onClick={() => handleEditUser(i.key)}
           >
             Edit
           </Button>
@@ -80,15 +83,13 @@ const AdminUser = () => {
 
   const fetchData = async () => {
     setLoading(true);
-
     try {
       const res = await userApi.getUserList();
-
       if (res.status === 200) {
         res.data && mapData(res.data);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Error");
     } finally {
       setLoading(false);
@@ -115,7 +116,7 @@ const AdminUser = () => {
       if (res.status === 200) {
         setShowModal(true);
         setUser(res.data);
-        console.log(res.data);
+        setCheck("Detail User");
       }
     } catch (error) {
       setShowModal(false);
@@ -123,9 +124,21 @@ const AdminUser = () => {
     }
   };
 
+  // const handleDetailUser = (id) => {
+  //   setUser(id);
+  //   setCheck("Detail User");
+  //   setShowModal(true);
+  // };
+
+  //Edit
+  const handleEditUser = (id) => {
+    setCheck("Edit User");
+    setShowModal(true);
+  };
+
   //Add
   const handleAddUser = () => {
-    setUser();
+    setCheck("Add User");
     setShowModal(true);
   };
 
@@ -153,8 +166,19 @@ const AdminUser = () => {
         data={items}
         columns={columns}
       ></AdminTable>
-      <AdminUserAdd show={showModal} setShow={setShowModal} user={user} />
-      <AdminUserDetail show={showModal} setShow={setShowModal} user={user} />
+      <AdminUserAdd
+        show={check === "Add User" ? showModal : ""}
+        setShow={check === "Add User" ? setShowModal : ""}
+      />
+      <AdminUserDetail
+        show={check === "Detail User" ? showModal : ""}
+        setShow={check === "Detail User" ? setShowModal : ""}
+        user={user}
+      />
+      <AdminUserEdit
+        show={check === "Edit User" ? showModal : ""}
+        setShow={check === "Edit User" ? setShowModal : ""}
+      />
     </div>
   );
 };

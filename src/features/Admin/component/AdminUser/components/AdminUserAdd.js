@@ -9,8 +9,6 @@ import AdminModal, {
 import UserForm from "../common/UserForm/UserForm";
 
 const AdminUserAdd = (props) => {
-  const user = props.user;
-
   const [formValues, setFormValues] = useState({
     email: "",
     username: "",
@@ -49,8 +47,8 @@ const AdminUserAdd = (props) => {
 
   return (
     <AdminModal
-      show={user ? "" : props.show}
-      setShow={user ? "" : props.setShow}
+      show={props.show}
+      setShow={props.setShow}
       style={{ width: "800px", margin: "5% auto" }}
     >
       <ModalHeader>Add User</ModalHeader>
