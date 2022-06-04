@@ -17,6 +17,10 @@ const userApi = {
     const url = "/users";
     return api.post(url, data);
   },
+  editUser: (id, data) => {
+    const url = `/users/${id}`;
+    return api.patch(url, data);
+  },
 };
 
 export default userApi;
