@@ -28,8 +28,11 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<Link to="/admin/user">User</Link>, "0", <UserOutlined />),
   getItem("Category", "sub1", <UploadOutlined />, [
-    getItem(<Link to="/admin/category">List Category</Link>, "2"),
-    getItem(<Link to="#">Specific Category</Link>, "3"),
+    getItem(<Link to="/admin/category/list-cate">List Category</Link>, "2"),
+    getItem(
+      <Link to="/admin/category/specific-cate">Specific Category</Link>,
+      "3"
+    ),
   ]),
   getItem("Product", "sub2", <VideoCameraOutlined />, [
     getItem("Option 1", "4"),
