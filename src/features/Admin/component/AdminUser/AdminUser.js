@@ -124,16 +124,19 @@ const AdminUser = () => {
     }
   };
 
-  // const handleDetailUser = (id) => {
-  //   setUser(id);
-  //   setCheck("Detail User");
-  //   setShowModal(true);
-  // };
-
   //Edit
-  const handleEditUser = (id) => {
-    setCheck("Edit User");
-    setShowModal(true);
+  const handleEditUser = async (id) => {
+    try {
+      const res = await userApi.getUser(id);
+      if (res.status === 200) {
+        setShowModal(true);
+        setUser(res.data);
+      }
+      setCheck("Edit User");
+    } catch (error) {
+      setShowModal(false);
+      toast.error(error);
+    }
   };
 
   //Add
@@ -166,19 +169,16 @@ const AdminUser = () => {
         data={items}
         columns={columns}
       ></AdminTable>
-      <AdminUserAdd
-        show={check === "Add User" ? showModal : ""}
-        setShow={check === "Add User" ? setShowModal : ""}
-      />
-      <AdminUserDetail
-        show={check === "Detail User" ? showModal : ""}
-        setShow={check === "Detail User" ? setShowModal : ""}
-        user={user}
-      />
-      <AdminUserEdit
-        show={check === "Edit User" ? showModal : ""}
-        setShow={check === "Edit User" ? setShowModal : ""}
-      />
+
+      {check === "Add User" && (
+        <AdminUserAdd show={showModal} setShow={setShowModal} />
+      )}
+      {check === "Detail User" && (
+        <AdminUserDetail show={showModal} setShow={setShowModal} user={user} />
+      )}
+      {check === "Edit User" && (
+        <AdminUserEdit show={showModal} setShow={setShowModal} user={user} />
+      )}
     </div>
   );
 };

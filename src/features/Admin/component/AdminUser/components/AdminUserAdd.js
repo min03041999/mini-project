@@ -1,35 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import api from "../../../../../api/UserApi";
-import AdminModal, {
-  ModalBody,
-  // ModalFooter,
-  ModalHeader,
-} from "../../../common/AdminModal/AdminModal";
 import UserForm from "../common/UserForm/UserForm";
 
 const AdminUserAdd = (props) => {
-  const [formValues, setFormValues] = useState({
-    email: "",
-    username: "",
-    password: "",
-    name: {
-      firstname: "",
-      lastname: "",
-    },
-    address: {
-      city: "",
-      street: "",
-      number: 0,
-      zipcode: "",
-      geolocation: {
-        lat: "",
-        long: "",
-      },
-    },
-    phone: "",
-  });
-
   //onSubmit handler
   const onSubmit = async (formData) => {
     console.log(formData);
@@ -38,31 +12,21 @@ const AdminUserAdd = (props) => {
       console.log(res);
       if (res.status === 200) {
         props.setShow(false);
-        toast.success("Thêm user thành công!");
+        toast.success("Add user successful!");
       }
     } catch (err) {
-      toast.error("Error");
+      toast.error("Error data");
+      console.log(err);
     }
   };
 
   return (
-    <AdminModal
+    <UserForm
       show={props.show}
       setShow={props.setShow}
-      style={{ width: "800px", margin: "5% auto" }}
-    >
-      <ModalHeader>Add User</ModalHeader>
-      <ModalBody>
-        <UserForm
-          initialValues={formValues}
-          onSubmit={onSubmit}
-          enableReinitialize
-        ></UserForm>
-      </ModalBody>
-      {/* <ModalFooter>
-        <Button onClick={() => props.setShow(false)}>Close</Button>
-      </ModalFooter> */}
-    </AdminModal>
+      onSubmit={onSubmit}
+      enableReinitialize
+    ></UserForm>
   );
 };
 
