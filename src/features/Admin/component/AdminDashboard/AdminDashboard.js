@@ -35,7 +35,7 @@ const items = [
     ),
   ]),
   getItem("Product", "sub2", <VideoCameraOutlined />, [
-    getItem("Option 1", "4"),
+    getItem(<Link to="/admin/product">List Product</Link>, "4"),
     getItem("Option 2", "5"),
   ]),
 ];
