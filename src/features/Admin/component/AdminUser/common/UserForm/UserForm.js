@@ -97,7 +97,6 @@ const UserForm = (props) => {
           >
             <ModalHeader>{user ? "Edit User" : "Add User"}</ModalHeader>
             <ModalBody>
-              {" "}
               <Row style={{ fontWeight: "bold" }}>
                 <h4>Info</h4>
               </Row>

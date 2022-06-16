@@ -1,14 +1,14 @@
 import React from "react";
 import { toast } from "react-toastify";
-import api from "../../../../../api/UserApi";
-import UserForm from "../common/UserForm/UserForm";
+import api from "../../../../../../api/ProductApi";
+import ProductForm from "../../common/ProductForm/ProductForm";
 
-const AdminUserAdd = (props) => {
+const AdminProductAdd = (props) => {
   //onSubmit handler
-  const onSubmit = async (formData) => {
-    // console.log(formData);
+  const onSubmitProduct = async (formData) => {
+    console.log(formData);
     try {
-      const res = await api.addUser(formData);
+      const res = await api.addProductApi(formData);
       console.log(res);
       if (res.status === 200) {
         props.setShow(false);
@@ -19,15 +19,14 @@ const AdminUserAdd = (props) => {
       console.log(err);
     }
   };
-
   return (
-    <UserForm
+    <ProductForm
       show={props.show}
       setShow={props.setShow}
-      onSubmit={onSubmit}
+      onSubmit={onSubmitProduct}
       enableReinitialize
-    ></UserForm>
+    />
   );
 };
 
-export default AdminUserAdd;
+export default AdminProductAdd;
