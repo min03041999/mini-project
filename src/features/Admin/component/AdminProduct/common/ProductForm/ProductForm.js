@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import { Col, Row } from "antd";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useEffect, useRef, useState } from "react";
+import { Button, FormGroup } from "react-bootstrap";
 import * as Yup from "yup";
-import { ErrorMessage, Formik, Form, Field } from "formik";
+import api from "../../../../../../api/CategoryApi";
 import AdminModal, {
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from "../../../../common/AdminModal/AdminModal";
-import { Row, Col } from "antd";
-import api from "../../../../../../api/CategoryApi";
-import { Button, FormGroup } from "react-bootstrap";
 import AdminTextEditor from "../../../../common/AdminTextEditor/AdminTextEditor";
+import "./product-form.css";
 
 const ProductForm = (props) => {
   const validationSchema = Yup.object().shape({
@@ -19,7 +20,7 @@ const ProductForm = (props) => {
   });
   const product = props.product;
   const [category, setCategory] = useState([]);
-  const [imgProduct, setImgProduct] = useState(product ? product.image : "");
+  const [imgProduct, setImgProduct] = useState();
   const imgRef = useRef();
   const [formValues, setFormValues] = useState({
     title: "",
@@ -28,15 +29,9 @@ const ProductForm = (props) => {
     // description: "",
   });
 
-  useEffect(() => {
-    setFormValues({
-      ...formValues,
-      title: product ? product.title : "",
-      category: product ? product.category : "",
-      price: product ? product.price : "",
-      // description: product ? product.description : "",
-    });
-  }, [product]);
+  //Text editor
+  const [initialValue, setInitialValue] = useState();
+  const editorRef = useRef(null);
 
   //Select Category
   const mapData = (data) => {
@@ -70,11 +65,16 @@ const ProductForm = (props) => {
     setImgProduct(file);
   };
 
-  //Text editor
-  const [initialValue, setInitialValue] = useState(
-    product ? product.description : ""
-  );
-  const editorRef = useRef(null);
+  useEffect(() => {
+    setFormValues({
+      ...formValues,
+      title: product ? product.title : "",
+      category: product ? product.category : "",
+      price: product ? product.price : "",
+    });
+    setImgProduct(product ? product.image : "");
+    setInitialValue(product ? product.description : "");
+  }, [product]);
 
   //Submit
   const handleSubmit = (values) => {

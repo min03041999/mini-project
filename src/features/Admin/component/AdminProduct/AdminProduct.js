@@ -5,6 +5,7 @@ import productApi from "../../../../api/ProductApi";
 import AdminTable from "../../common/AdminTable/AdminTable";
 import AdminProductAdd from "./components/AdminProductAdd/AdminProductAdd";
 import AdminProductEdit from "./components/AdminProductEdit/AdminProductEdit";
+import AdminProductDetail from "./components/AdminProductDetail/AdminProductDetail";
 
 const AdminProduct = () => {
   const [items, setItems] = useState([]);
@@ -77,6 +78,7 @@ const AdminProduct = () => {
           <Button
             type="primary"
             style={{ backgroundColor: "#40a9ff", borderColor: "#40a9ff" }}
+            onClick={() => handleDetailProduct(i.key)}
           >
             Detail
           </Button>
@@ -98,6 +100,21 @@ const AdminProduct = () => {
       ),
     },
   ];
+
+  //Detail
+  const handleDetailProduct = async (id) => {
+    try {
+      const res = await productApi.detailProductApi(id);
+      if (res.status === 200) {
+        setShowModal(true);
+        setProduct(res.data);
+        setCheck("Detail Product");
+      }
+    } catch (error) {
+      setShowModal(false);
+      toast.error(error);
+    }
+  };
 
   //Delete
   const handleDeleteProduct = async (id) => {
@@ -157,6 +174,13 @@ const AdminProduct = () => {
       )}
       {check === "Edit Product" && (
         <AdminProductEdit
+          show={showModal}
+          setShow={setShowModal}
+          product={product}
+        />
+      )}
+      {check === "Detail Product" && (
+        <AdminProductDetail
           show={showModal}
           setShow={setShowModal}
           product={product}
