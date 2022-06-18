@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button } from "react-bootstrap";
 import AdminModal, {
   ModalBody,
   ModalFooter,
@@ -81,7 +81,22 @@ const AdminProductDetail = (props) => {
         </Row>
       </ModalBody>
       <ModalFooter>
-        <Button onClick={() => props.setShow(false)}>Close</Button>
+        <Row
+          style={{
+            justifyContent: "flex-end",
+            gap: "10px",
+          }}
+        >
+          <Button
+            onClick={() => props.setShow(false)}
+            style={{
+              backgroundColor: "#ff4d4f",
+              borderColor: "#ff4d4f",
+            }}
+          >
+            Close
+          </Button>
+        </Row>
       </ModalFooter>
     </AdminModal>
   );
