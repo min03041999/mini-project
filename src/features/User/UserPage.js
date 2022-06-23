@@ -7,7 +7,7 @@ const UserPage = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: "70px" }}>
+      <div>
         <Routes />
       </div>
       <Footer />
