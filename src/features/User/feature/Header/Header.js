@@ -18,13 +18,16 @@ const Header = () => {
             <Link to="/home">Home</Link>
           </li>
           <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
             <Link to="/product">Product</Link>
           </li>
           <li>
-            <Link to="/testimonials">Testimonial</Link>
+            <Link to="/contact">Contact</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/login">Login</Link>
           </li>
         </ul>
         <h1 className="logo-hambuger">I'mM Store</h1>
